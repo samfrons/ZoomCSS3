@@ -1,0 +1,206 @@
+<!doctype html>
+<!-- Conditional comment for mobile ie7 blogs.msdn.com/b/iemobile/ -->
+<!--[if IEMobile 7 ]>    <html class="no-js iem7" lang="en"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+
+  <title></title>
+  <meta name="description" content="">
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width">
+<style type="text/css">
+
+html {
+	height: 100%;
+	width: 100%;
+	margin: 0 auto;
+	background-color: black;
+}
+
+a {
+	text-decoration: none;
+}
+
+body {
+	margin-left: 40%;
+	margin-right: 40%;
+	font-family: 'Helvetica Neue';
+}
+
+section {
+
+}
+section div {
+	height: 100px;
+	width: 100px;
+	background-color: rgba(0, 127, 127, 0.415686);
+	box-shadow: 0px 0px 20px rgba(0,255,255,0.5);
+	border: 1px solid rgba(127,255,255,0.25);
+	margin: 15px;
+	-webkit-transition: 1s all ease-in-out;
+	text-align: center;
+color: rgba(255, 255, 255, 0.75);
+font-weight: bold;
+-webkit-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
+-moz-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
+-o-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
+-ms-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
+filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
+}
+
+div p#hover_info {
+	min-height: 200px;
+	min-width: 200px;
+	opacity: 0;
+	-webkit-transition: 1s all ease-in-out;
+	z-index: 1;
+}
+
+div p#hover_info:hover {
+opacity: 1;
+min-height: 200px;
+min-width: 200px;
+background-color: red;
+-webkit-transform: translate(50px,0px);
+	
+}
+
+#zoom_content {
+	-webkit-transition: 1s all ease-in-out;
+	background: rgba(30,42,143,0.4);
+	position: absolute;
+	opacity: 0;
+	top: 38px;
+	left: 40%;
+	
+	height: 0;
+	display: inline-block;
+	width: 0;
+	overflow: hidden;
+	color: white;
+	-webkit-transition: 1s all ease-in-out;
+	z-index: 2;
+	
+}
+
+#zoom_content ul li:first-child:after {
+content:"- hover after";
+
+}
+
+#zoom_content ul li:first-child:hover:after {
+content:"- hover after";
+color: blue;
+}
+
+#zoom_content ul {
+	font-size: 50%;
+}
+
+
+
+#zoom_panel {
+display: none;
+color: black;
+z-index: 100;
+position: absolute;
+left: 300px;
+}
+
+h4#zoom_out {
+	position: absolute;
+	left: 400px;
+	display: none;
+	color: white;
+}
+
+li p {
+	display: none;
+}
+
+header h1 {
+	min-width: 500px;
+}
+
+</style>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+
+	<header>
+		<h1>zoom-in/dynamic content demo</h1>
+	<h4 id="zoom_out">zoom out</h4>
+<section>
+<a href="#square1"><div id="square1">square1
+<p id="hover_info">hover info</p>
+<div id="zoom_content">
+	
+	<ul>
+	<li>link1
+		<p>link1 panel</p>
+	</li>
+
+	<li>link2
+		<p>link2 panel</p></li>
+	<li>link3</li>
+	<li>link4</li>
+	</ul>
+
+	</div>
+<p id="zoom_panel">zoom panel</p>
+</div>
+</div>
+</a>
+
+
+
+<div>square2</div>
+<div>square3</div>
+<div>square4</div>
+
+
+</section>
+<script>
+$(document).ready(function() {
+  $("div#square1").click(function(){
+  	
+  	$("section").css("zoom","200%");
+  	$("div#zoom_content").css( {'height' : '100px' , 'width' : '100px' , "opacity" : "1" , } );
+  	$("h4#zoom_out").css("display","block" );
+  	$("p#hover_info").css("display","none" );
+  	console.log('hi')
+  });
+
+  $("div#square1").hover(function() {
+$("p#hover_info").css("display","block" );	
+  	});
+  $("div#zoom_content").click(function(){
+  	//$("p#zoom_panel").css("display","block" );
+  	
+  	console.log('hello')
+  });
+
+  $("div#zoom_content ul li:first-child").click(function(){
+  	$("div#zoom_content ul li:first-child p").css("display","block" );
+  	console.log('sup')
+  });
+
+    $("div#zoom_content ul li:nth-child(2)").click(function(){
+  	$("div#zoom_content ul li:nth-child(2) p").css( { "display" : "block"  });
+  	$("div#zoom_content ul li:first-child p").css("display","none" );
+  	console.log('sup2')
+  });
+
+
+  $("h4#zoom_out").click(function() {
+  	$("section").css("zoom","100%");
+  	$("div#zoom_content").css( {'height' : '0' , 'width' : '0' } );
+  })
+  });
+  </script>
+</body>
+</html>
